@@ -1,4 +1,4 @@
-import { analyzeMedicine } from "@/lib/openai";
+import { cloudAI } from "@/lib/cloud-ai";
 import { getMedicineData } from "@/lib/fda";
 
 import HeroSection from "@/components/hero-section";
@@ -17,18 +17,19 @@ export default async function Home() {
   const fdaData = await getMedicineData(medicineName);
 
   // AI DATA
-  const aiData = await analyzeMedicine(medicineName);
+  const aiData = await cloudAI(medicineName);
 
   return (
     <main className="min-h-screen bg-background">
       <MedicineScanner />
-      <HeroSection/>
+      <HeroSection />
 
       <FeaturesSection />
+
       <AiAnalysisCard
-  aiData={aiData}
-  fdaData={fdaData}
-/>
+        aiData={aiData}
+        fdaData={fdaData}
+      />
 
       {/* AI + FDA DATA */}
       <AnalysisSection
